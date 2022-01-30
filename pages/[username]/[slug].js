@@ -5,7 +5,7 @@ import {
   getDoc,
   getDocs,
 } from "firebase/firestore";
-import { db, getUserWithUserName, postToJSON } from "../../lib/firebase";
+import { auth, db, getUserWithUserName, postToJSON } from "../../lib/firebase";
 import { getUserPost } from "../../lib/hooks";
 import styles from "../../styles/Post.module.css";
 import PostContent from "../../components/PostContent";
@@ -73,12 +73,12 @@ export default function PostPage(props) {
           }
         >
           <HeartButton postRef={props.path} />
+          {post?.uid === auth?.currentUser?.uid ? (
+            <Link href={`/admin/${post.slug}`}>
+              <button className="btn">Edit</button>
+            </Link>
+          ) : null}
         </AuthCheck>
-        {post.username === username ? (
-          <Link href={`/admin/${post.slug}`}>
-            <button className="btn">Edit</button>
-          </Link>
-        ) : null}
       </aside>
     </main>
   );

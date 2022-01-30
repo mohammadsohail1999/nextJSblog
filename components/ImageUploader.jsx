@@ -14,8 +14,6 @@ const ImageUploader = ({ uid }) => {
   const [progress, setProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState(null);
 
-  console.log(progress);
-
   const uploadHandler = (e) => {
     const file = e.target.files[0];
     const storageRef = ref(storage, `blog/${uid}/${file.name}`);
